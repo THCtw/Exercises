@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="5c7ab0e4-749d-4012-aa8c-035695f5a089" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +48,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\every\Google Drive\GitHub\Exercises" />
+    </key>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -43,10 +66,25 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
-    <state x="427" y="96" key="SettingsEditor" timestamp="1591166339363">
+    <state x="817" y="351" key="#Notifications" timestamp="1591758881984">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="427" y="96" key="SettingsEditor/0.0.1920.1040/0.-1080.1920.1080@0.0.1920.1040" timestamp="1591166339363" />
+    <state x="817" y="351" key="#Notifications/0.0.1920.1040/0.-1080.1920.1080@0.0.1920.1040" timestamp="1591758881984" />
+    <state x="376" y="-948" key="SettingsEditor" timestamp="1591758600387">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="376" y="-948" key="SettingsEditor/0.0.1920.1040/0.-1080.1920.1080@0.0.1920.1040" timestamp="1591758600387" />
   </component>
 </project>
