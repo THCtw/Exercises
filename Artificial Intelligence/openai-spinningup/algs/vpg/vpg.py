@@ -7,7 +7,8 @@ from torch.distributions import Categorical
 
 import vpg.core as core
 
-def vpg()
+def vpg():
+    return True
 
 
 if __name__ == '__main__':
