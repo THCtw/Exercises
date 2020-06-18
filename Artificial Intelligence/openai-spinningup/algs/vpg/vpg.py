@@ -5,7 +5,7 @@ import torch.optim as optim
 import torch.nn.functional as F
 from torch.distributions import Categorical
 
-import vpg.core as core
+import algs.vpg.core as core
 
 def vpg():
     return True
