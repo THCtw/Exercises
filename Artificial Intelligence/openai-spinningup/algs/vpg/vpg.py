@@ -18,7 +18,7 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.5, seed=0, episodes_per
 
     # Set up policy agent
     pgnet = core.PGNet()
-    vfnet = core.VFNet
+    vfnet = core.VFNet()
     agent = policyAgent(pgnet, vfnet)
 
     agent.pgnet.train()
