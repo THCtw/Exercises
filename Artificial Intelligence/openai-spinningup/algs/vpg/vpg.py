@@ -27,7 +27,7 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.5, seed=0, episodes_per
     avg_total_rewards, avg_final_rewards = [], []
     
     prg_bar = tqdm.tqdm(total=num_batch)
-    for batch in prg_bar:
+    for batch in range(num_batch):
 
         states, log_probs, rewards, ret = [], [], [], []
         total_rewards, final_rewards = [], []
@@ -69,6 +69,7 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.5, seed=0, episodes_per
         avg_total_rewards.append(avg_total_reward)
         avg_final_rewards.append(avg_final_reward)
         prg_bar.set_description(f"Total: {avg_total_reward: 4.1f}, Final: {avg_final_reward: 4.1f}")    
+        prg_bar.update(1)
 
         # Update Policy Gradient Network
         agent.update_pgnet(log_probs, states, episodes_per_batch)
