@@ -60,7 +60,7 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.5, seed=0, episodes_per
                     total_rewards.append(total_reward)
                     states.append(episode_states)
                     rewards.append(episode_rewards)
-                    ret.append(core.discount_cumsum(rewards, gamma))
+                    ret.append(core.discount_cumsum(episode_rewards, gamma))
                     break
 
     	# Log training process
