@@ -4,6 +4,7 @@ import scipy.signal
 import torch
 import torch.nn as nn
 import torch.optim as optim
+import torch.nn.functional as F
 from torch.distributions.normal import Normal
 from torch.distributions.categorical import Categorical
 
