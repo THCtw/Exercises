@@ -50,7 +50,7 @@ class VFNet(nn.Module):
     
 class PGAgent():
 
-	def __init__(self, pgnet, vfnet):
+    def __init__(self, pgnet, vfnet):
         self.pgnet = pgnet
         self.vfnet = vfnet
         self.pg_optimizer = optim.SGD(self.pgnet.parameters(), lr=0.001)
