@@ -61,8 +61,8 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.5, seed=0, episodes_per
                     states.append(episode_states)
                     rewards.append(episode_rewards)
                     ret.append(core.discount_cumsum(rewards, gamma)
-
                     break
+
     	# Log training process
         avg_total_reward = sum(total_rewards) / len(total_rewards)
         avg_final_reward = sum(final_rewards) / len(final_rewards)
