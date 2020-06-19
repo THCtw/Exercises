@@ -26,7 +26,7 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.5, seed=0, episodes_per
 
     avg_total_rewards, avg_final_rewards = [], []
     
-    prg_bar = tqdm(range(num_batch))
+    prg_bar = tqdm.tqdm(total=num_batch)
     for batch in prg_bar:
 
         states, log_probs, rewards, ret = [], [], [], []
