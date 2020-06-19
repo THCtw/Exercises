@@ -68,7 +68,7 @@ class PGAgent():
         self.pg_optimizer.step()
 
     def update_vfnet(self, states, ret):
-        vals = self.vfnet(torch.FloatTensor(states)
+        vals = self.vfnet(torch.FloatTensor(states))
         vals = torch.stack(vals)
         loss = ((vals - ret)**2).mean()
         
