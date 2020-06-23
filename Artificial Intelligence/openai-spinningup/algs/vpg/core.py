@@ -41,7 +41,7 @@ class VFNet(nn.Module):
         super().__init__()
         self.fc1 = nn.Linear(8, 16)
         self.fc2 = nn.Linear(16, 16)
-        self.fc3 = nn.Linear(16, 4)
+        self.fc3 = nn.Linear(16, 8)
         self.fc4 = nn.Linear(8, 1)
 
     def forward(self, state):
@@ -60,18 +60,18 @@ class PGAgent():
 
     def update_pgnet(self, log_probs, states, episodes_per_batch):
         advs = self.vfnet(torch.FloatTensor(states))
+        # Normalize and standerdize
+        advs = 
 
         log_probs = torch.stack(log_probs)
-        advs = torch.stack(advs)
-        loss = (-log_probs * advs).mean()
+        loss = (-log_probs * advs).sum()/episodes_per_batch
 
         self.pg_optimizer.zero_grad()
         loss.backward()
         self.pg_optimizer.step()
 
-    def update_vfnet(self, states, ret):
+    def learn_vfnet(self, states, ret):
         vals = self.vfnet(torch.FloatTensor(states))
-        vals = torch.stack(vals)
         loss = ((vals - ret)**2).mean()
         
         self.vf_optimizer.zero_grad()
