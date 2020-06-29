@@ -11,7 +11,12 @@ import gym
 
 import algs.vpg.core as core
 
-def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, episodes_per_batch=5, num_batch=400):
+from spinup.utils.logx import EpochLogger
+from spinup.utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
+from spinup.utils.mpi_tools import mpi_fork, mpi_avg, proc_id, mpi_statistics_scalar, num_procs
+
+
+def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, EPISODE_PER_BATCH=2000, num_batch=50, train_v_iters=80):
     
     # Set up OpenAI Gym environment
     env = env()
@@ -33,7 +38,7 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, episodes_per
         total_rewards, final_rewards = [], []
 
         # Collecting training data
-        for episode in range(episodes_per_batch):
+        for episode in range(EPISODE_PER_BATCH):
 
             state = env.reset()
             total_reward, total_step = 0, 0
@@ -73,13 +78,13 @@ def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, episodes_per
 
         # Update Policy Gradient Network
         states = np.concatenate(states, axis=0)
-        agent.update_pgnet(log_probs, states, episodes_per_batch)
         ret = np.concatenate(ret, axis=0)
-        agent.learn_vfnet(states, torch.from_numpy(ret)) 
+        agent.update_pgnet(log_probs, states, EPISODE_PER_BATCH)
+        agent.learn_vfnet(states, torch.from_numpy(ret), train_v_iters) 
 
     plt.plot(avg_total_rewards)
     plt.title("Total Rewards")
-    plt.savefig('avg_total_rewards.png')
+    plt.savefig('results/avg_total_rewards.png')
     plt.close()
 
     plt.plot(avg_final_rewards)

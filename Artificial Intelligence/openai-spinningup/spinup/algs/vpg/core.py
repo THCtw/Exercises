@@ -10,7 +10,7 @@ from torch.distributions.categorical import Categorical
 
 def discount_cumsum(x, discount):
 	"""
-    Computing discounted cumulative sums of vectors
+
 	
 	input: 
 		vector x, [x0, x1, x2]
@@ -58,25 +58,28 @@ class PGAgent():
         self.pg_optimizer = optim.SGD(self.pgnet.parameters(), lr=0.001)
         self.vf_optimizer = optim.SGD(self.vfnet.parameters(), lr=0.001)
 
-    def update_pgnet(self, log_probs, states, episodes_per_batch):
-        advs = self.vfnet(torch.FloatTensor(states))
-        # Normalize and standerdize
-        advs = 
-
+    def update_pgnet(self, log_probs, states, EPISODE_PER_BATCH):
         log_probs = torch.stack(log_probs)
-        loss = (-log_probs * advs).sum()/episodes_per_batch
+        advs = self.vfnet(torch.FloatTensor(states))
+        # advs = torch.FloatTensor(states)
+        advs = (advs - advs.mean()) / advs.std()
+        loss = (-log_probs * advs).sum()/EPISODE_PER_BATCH
 
         self.pg_optimizer.zero_grad()
         loss.backward()
         self.pg_optimizer.step()
 
-    def learn_vfnet(self, states, ret):
-        vals = self.vfnet(torch.FloatTensor(states))
-        loss = ((vals - ret)**2).mean()
-        
-        self.vf_optimizer.zero_grad()
-        loss.backward()
-        self.vf_optimizer.step()
+    def learn_vfnet(self, states, rewards_to_go, train_v_iters):
+        for i in range(train_v_iters):
+            value_estimates = self.vfnet(torch.FloatTensor(states))
+            #(value_estimates - value_estimates.mean()) / value_estimates.std()
+            loss = ((value_estimates-rewards_to_go)**2).mean()
+            if (i % 10) == 0: 
+                print("vfnet.loss = {}".format(loss))
+
+            self.vf_optimizer.zero_grad()
+            loss.backward()
+            self.vf_optimizer.step()
 
     def sample(self, state):
         action_prob = self.pgnet(torch.FloatTensor(state))

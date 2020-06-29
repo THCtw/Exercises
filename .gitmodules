@@ -1,0 +1,3 @@
+[submodule "Artificial Intelligence/openai-spinningup/spinningup"]
+	path = Artificial Intelligence/openai-spinningup/spinningup
+	url = https://github.com/openai/spinningup.git
