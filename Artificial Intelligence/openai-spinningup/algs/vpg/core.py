@@ -8,8 +8,6 @@ import torch.nn.functional as F
 from torch.distributions.normal import Normal
 from torch.distributions.categorical import Categorical
 
-from utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
-
 def discount_cumsum(x, discount):
 	"""
 

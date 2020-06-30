@@ -11,9 +11,6 @@ import gym
 
 import algs.vpg.core as core
 
-from utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
-
-
 def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, EPISODE_PER_BATCH=2000, num_batch=50, train_v_iters=80):
     
     # Set up OpenAI Gym environment
