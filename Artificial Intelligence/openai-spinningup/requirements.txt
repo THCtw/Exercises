@@ -5,3 +5,4 @@ numpy
 torch
 matplotlib
 scipy
+mpi4py

@@ -11,16 +11,11 @@ import gym
 
 import algs.vpg.core as core
 
-from spinup.utils.logx import EpochLogger
-from spinup.utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
-from spinup.utils.mpi_tools import mpi_fork, mpi_avg, proc_id, mpi_statistics_scalar, num_procs
+from utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
 
 
 def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, EPISODE_PER_BATCH=2000, num_batch=50, train_v_iters=80):
     
-    # Special function to avoid certain slowdowns from PyTorch + MPI combo.
-    setup_pytorch_for_mpi()
-
     # Set up OpenAI Gym environment
     env = env()
 
@@ -107,8 +102,5 @@ if __name__ == '__main__':
     parser.add_argument('--batches', type=int, default=50)
     parser.add_argument('--exp_name', type=str, default='vpg')
     args = parser.parse_args()
-
-    # Run parallel code with mpi
-    mpi_fork(args.cpu)
 
     vpg(lambda : gym.make(args.env), policyAgent=core.VPGAgent, gamma=args.gamma, seed=args.seed, episodes_per_batch=args.episodes, num_batch=batches) 

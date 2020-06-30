@@ -8,9 +8,7 @@ import torch.nn.functional as F
 from torch.distributions.normal import Normal
 from torch.distributions.categorical import Categorical
 
-from spinup.utils.logx import EpochLogger
-from spinup.utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
-from spinup.utils.mpi_tools import mpi_fork, mpi_avg, proc_id, mpi_statistics_scalar, num_procs
+from utils.mpi_pytorch import setup_pytorch_for_mpi, sync_params, mpi_avg_grads
 
 def discount_cumsum(x, discount):
 	"""
@@ -71,20 +69,16 @@ class PGAgent():
 
         self.pg_optimizer.zero_grad()
         loss.backward()
-        mpi_avg_grads(self.pgnet)
         self.pg_optimizer.step()
 
     def learn_vfnet(self, states, rewards_to_go, train_v_iters):
+        value_estimates = self.vfnet(torch.FloatTensor(states))
         for i in range(train_v_iters):
-            value_estimates = self.vfnet(torch.FloatTensor(states))
             #(value_estimates - value_estimates.mean()) / value_estimates.std()
             loss = ((value_estimates-rewards_to_go)**2).mean()
-            if (i % 10) == 0: 
-                print("vfnet.loss = {}".format(loss))
 
             self.vf_optimizer.zero_grad()
             loss.backward()
-            mpi_avg_grads(self.vfnet)
             self.vf_optimizer.step()
 
     def sample(self, state):
