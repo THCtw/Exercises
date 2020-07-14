@@ -11,7 +11,7 @@ import gym
 
 import algs.vpg.core as core
 
-def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, EPISODE_PER_BATCH=2000, num_batch=50, train_v_iters=80):
+def vpg(env, record=1, policyAgent=core.PGAgent, gamma=0.9, seed=0, EPISODE_PER_BATCH=50, num_batch=50, train_v_iters=80):
     
     # Set up OpenAI Gym environment
     env = env()
